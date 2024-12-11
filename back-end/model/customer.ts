@@ -1,44 +1,26 @@
 import { Review } from "./review";
 import { Ride } from "./ride";
+import { User } from "./user";
 
 export class Customer{
     private id?: number;
-    private firstName: string;
-    private lastName: string;
-    private birthday: Date;
-    private email: string;
-    private phoneNumber: string;
+    readonly user: User;
     private reviews?: Review[];
     private rides?: Ride[];
 
 
-    constructor(customer: { id?: number; firstName: string;lastName: string;birthday: Date;email: string; phoneNumber:string}){
+    constructor(customer: { id?: number; user: User}){
         this.id = customer.id;
-        this.firstName = customer.firstName;
-        this.lastName = customer.lastName;
-        this.birthday = customer.birthday;
-        this.email = customer.email;
-        this.phoneNumber = customer.phoneNumber;
+        this.user = customer.user;
     }
 
     getId(): number | undefined {
         return this.id;
     }
-    getFirstName(): string{
-        return this.firstName;
+    getUser(): User {
+        return this.user;
     }
-    getLastName(): string{
-        return this.lastName;
-    }
-    getBirthday(): Date{
-        return this.birthday;
-    }
-    getEmail(): string{
-        return this.email;
-    }
-    getPhoneNumber(): string {
-        return this.phoneNumber;
-    }
+    
     getReviews(): Review[] | undefined{
         return this.reviews;
     }

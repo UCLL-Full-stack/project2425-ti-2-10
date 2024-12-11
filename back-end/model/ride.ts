@@ -9,11 +9,11 @@ export class Ride{
     private date: Date;
     private destination: string;
     private driver: Driver;
-    private customer: Customer;
-    private vehicle: Vehicle;
-    private managers: Manager[];
+    private customer?: Customer;
+    private vehicle?: Vehicle;
+    private manager?: Manager;
     
-    constructor(ride: { id?: number; startLocation: string;date: Date; destination: string;driver: Driver;customer: Customer;vehicle: Vehicle;managers: Manager[]}){
+    constructor(ride: { id?: number; startLocation: string;date: Date; destination: string;driver: Driver;customer: Customer;vehicle: Vehicle;manager: Manager}){
         this.id = ride.id;
         this.startLocation = ride.startLocation;
         this.date = ride.date;
@@ -21,7 +21,7 @@ export class Ride{
         this.customer = ride.customer;
         this.driver = ride.driver;
         this.vehicle = ride.vehicle;
-        this.managers = ride.managers;
+        this.manager = ride.manager;
     }
 
     getId(): number | undefined {
@@ -39,13 +39,13 @@ export class Ride{
     getDriver(): Driver{
         return this.driver;
     }
-    getCustomer(): Customer{
+    getCustomer(): Customer | undefined{
         return this.customer;
     }
-    getVehicle(): Vehicle{
+    getVehicle(): Vehicle | undefined{
         return this.vehicle;
     }
-    getManagers(): Manager[]{
-        return this.managers;
+    getManagers(): Manager | undefined{
+        return this.manager;
     }
 }

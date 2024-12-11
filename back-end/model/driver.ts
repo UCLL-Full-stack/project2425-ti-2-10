@@ -1,43 +1,35 @@
 import { Review } from "./review";
 import { Ride } from "./ride";
+import { User } from "./user";
 
 export class Driver{
-    private id?: number;
-    private firstName: string;
-    private lastName: string;
-    private birthday: Date;
-    private email: string;
-    private phoneNumber: string;
-    private rides?: Ride[];
-    private reviews?: Review[]; //undefined laten? of init met lege array altijd?
+    readonly id?: number;
+    readonly user: User;
+    readonly rides?: Ride[];
+    readonly reviews?: Review[]; //undefined laten? of init met lege array altijd?
 
-    constructor(driver: { id?: number; firstName: string;lastName: string;birthday: Date;email: string; phoneNumber:string}){
+    constructor(driver: { id?: number; user: User; rides?: Ride[]; reviews?:Review[]}){
+        this.validate(driver);
+
+        
         this.id = driver.id;
-        this.firstName = driver.firstName;
-        this.lastName = driver.lastName;
-        this.birthday = driver.birthday;
-        this.email = driver.email;
-        this.phoneNumber = driver.phoneNumber;
+        this.user = driver.user;
+        this.rides = driver.rides;
+        this.reviews = driver.reviews;
+    }
+    validate(driver: { id?: number; user: User; rides?: Ride[]; reviews?:Review[]}) {
+        if (!driver.user) {
+            throw new Error('Firstname is required');
+        }
     }
 
     getId(): number | undefined {
         return this.id;
     }
-    getFirstName(): string{
-        return this.firstName;
+    getUser(): User {
+        return this.user;
     }
-    getLastName(): string{
-        return this.lastName;
-    }
-    getBirthday(): Date{
-        return this.birthday;
-    }
-    getEmail(): string{
-        return this.email;
-    }
-    getPhoneNumber(): string {
-        return this.phoneNumber;
-    }
+
     getReviews(): Review[] | undefined{
         return this.reviews;
     }
