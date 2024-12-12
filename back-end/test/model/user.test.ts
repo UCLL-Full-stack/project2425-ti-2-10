@@ -11,7 +11,7 @@ test('given: valid values for user, when: user is created, then: user is created
     
     
     //when
-    const user = new User({firstName: firstName ,lastName: lastName,birthday: birthDate,email: email,phoneNumber:phonenumber });
+    const user = new User({firstName: firstName ,lastName: lastName,birthday: birthDate,email: email,phoneNumber:phonenumber ,role: 'driver'});
 
     //then
     expect(user.firstName).toEqual(firstName);

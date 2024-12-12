@@ -7,7 +7,7 @@ import { User } from "../../model/user";
     const lastName = "test";
     const email = "driver@test.com";
     const phoneNumber = "+32497896758";
-    const user = new User({ firstName, lastName, birthday: birthDate, email, phoneNumber });
+    const user = new User({ firstName, lastName, birthday: birthDate, email, phoneNumber ,role: 'driver'});
 
 test('given: valid values for driver, when: driver is created, then: driver is created with those values', () => {
     

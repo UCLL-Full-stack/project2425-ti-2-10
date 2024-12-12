@@ -3,10 +3,10 @@ import { Ride } from "./ride";
 import { User } from "./user";
 
 export class Driver{
-    readonly id?: number;
-    readonly user: User;
-    readonly rides?: Ride[];
-    readonly reviews?: Review[]; //undefined laten? of init met lege array altijd?
+    private id?: number;
+    private user: User;
+    private rides?: Ride[];
+    private reviews?: Review[]; //undefined laten? of init met lege array altijd?
 
     constructor(driver: { id?: number; user: User; rides?: Ride[]; reviews?:Review[]}){
         this.validate(driver);
@@ -19,7 +19,7 @@ export class Driver{
     }
     validate(driver: { id?: number; user: User; rides?: Ride[]; reviews?:Review[]}) {
         if (!driver.user) {
-            throw new Error('Firstname is required');
+            throw new Error('User is required');
         }
     }
 
@@ -35,5 +35,11 @@ export class Driver{
     }
     getRides(): Ride[] | undefined{
         return this.rides;
+    }
+    addRideToDriver(ride : Ride){
+        this.rides?.push(ride);
+    }
+    addReviewToDriver(review: Review){
+        this.reviews?.push(review);
     }
 }

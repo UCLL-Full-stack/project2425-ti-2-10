@@ -14,6 +14,8 @@ export class Ride{
     private manager?: Manager;
     
     constructor(ride: { id?: number; startLocation: string;date: Date; destination: string;driver: Driver;customer: Customer;vehicle: Vehicle;manager: Manager}){
+        this.validate(ride);
+        
         this.id = ride.id;
         this.startLocation = ride.startLocation;
         this.date = ride.date;
@@ -22,6 +24,30 @@ export class Ride{
         this.driver = ride.driver;
         this.vehicle = ride.vehicle;
         this.manager = ride.manager;
+    }
+
+    validate(ride: { id?: number; startLocation: string;date: Date; destination: string;driver: Driver;customer: Customer;vehicle: Vehicle;manager: Manager}){
+        if(!ride.startLocation){
+            throw new Error("startLocation should not be empty.")
+        }
+        if(!ride.date){
+            throw new Error("Date should not be empty.")
+        }
+        if(!ride.destination){
+            throw new Error("Destination should not be empty.")
+        }
+        if(!ride.driver){
+            throw new Error("A ride should have a driver.")
+        }
+        if(!ride.customer){
+            throw new Error("A ride should have a customer.")
+        }
+        if(!ride.vehicle){
+            throw new Error("A ride should have a vehicle.")
+        }
+        if(!ride.manager){
+            throw new Error("A ride should be managed by a manager.")
+        }
     }
 
     getId(): number | undefined {

@@ -1,3 +1,5 @@
+import { Role } from "../types";
+
 
 
 export class User{
@@ -8,8 +10,9 @@ export class User{
     readonly birthday: Date;
     readonly email: string;
     readonly phoneNumber: string;
+    readonly  role: Role;
 
-    constructor(user: { id?: number; firstName: string;lastName: string;birthday: Date;email: string; phoneNumber:string;}){
+    constructor(user: { id?: number; firstName: string;lastName: string;birthday: Date;email: string; phoneNumber:string; role: Role;}){
         this.validate(user);
 
         
@@ -19,19 +22,20 @@ export class User{
         this.birthday = user.birthday;
         this.email = user.email;
         this.phoneNumber = user.phoneNumber;
+        this.role = user.role;
     }
 
-    validate(user: { id?: number; firstName: string;lastName: string;birthday: Date;email: string; phoneNumber:string; }) {
-        if (!user.firstName) {
+    validate(user: { id?: number; firstName: string;lastName: string;birthday: Date;email: string; phoneNumber:string;role: Role }) {
+        if (!user.firstName?.trim()) {
             throw new Error('Firstname is required');
         }
-        if (!user.lastName) {
+        if (!user.lastName?.trim()) {
             throw new Error('Lastname is required');
         }if (!user.birthday) {
             throw new Error('Birthday is required');
-        }if (!user.email) {
+        }if (!user.email?.trim()) {
             throw new Error('Email is required');
-        }if (!user.phoneNumber) {
+        }if (!user.phoneNumber?.trim()) {
             throw new Error('PhoneNumber is required');
         }
     }
@@ -51,6 +55,11 @@ export class User{
     getPhoneNumber(): string {
         return this.phoneNumber;
     }
+    getRole(): Role {
+        return this.role;
+    }
+
+    
 
 
 }

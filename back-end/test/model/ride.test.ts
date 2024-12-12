@@ -7,9 +7,9 @@ import { Vehicle } from "../../model/vehicle";
 
     //given
     const birthDate = new Date("2024-11-11");
-    const driverUser = new User({ firstName: "driver", lastName: "test", birthday: birthDate, email: "driver@test.com", phoneNumber: "+32497896758" });
-    const customerUser = new User({ firstName: "customer", lastName: "test", birthday: birthDate, email: "customer@test.com", phoneNumber: "+32497896759" });
-    const managerUser = new User({ firstName: "manager", lastName: "test", birthday: birthDate, email: "manager@test.com", phoneNumber: "+32497896760" });
+    const driverUser = new User({ firstName: "driver", lastName: "test", birthday: birthDate, email: "driver@test.com", phoneNumber: "+32497896758",role: 'driver' });
+    const customerUser = new User({ firstName: "customer", lastName: "test", birthday: birthDate, email: "customer@test.com", phoneNumber: "+32497896759",role:'customer' });
+    const managerUser = new User({ firstName: "manager", lastName: "test", birthday: birthDate, email: "manager@test.com", phoneNumber: "+32497896760" ,role: "manager"});
 
     const driver = new Driver({ id: 1, user: driverUser });
     const customer = new Customer({ id: 2, user: customerUser });
