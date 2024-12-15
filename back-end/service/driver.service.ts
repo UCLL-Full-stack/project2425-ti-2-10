@@ -3,7 +3,7 @@ import { User } from "../model/user";
 import driverDb from "../repository/driver.db";
 
 
-const getAllDrivers = (): Driver[] => {
+const getAllDrivers = (): Promise<Driver[]> => {
     return driverDb.getAllDrivers();
 }
 

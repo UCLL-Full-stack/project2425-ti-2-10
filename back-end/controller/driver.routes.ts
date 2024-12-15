@@ -11,6 +11,7 @@ driverRouter.get('/', async (req: Request, res: Response, next: NextFunction) =>
         res.status(200).json(drivers);
     } catch (error) {
         next(error);
+        console.log(error);
     }
 });
 
