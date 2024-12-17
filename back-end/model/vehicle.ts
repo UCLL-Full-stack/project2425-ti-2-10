@@ -1,21 +1,20 @@
 import { Ride } from "./ride";
+import { Vehicle as VehiclePrisma } from "@prisma/client";
 
 export class Vehicle{
     private id?: number;
     private chassisnumber: string;
     private brand: string;
     private licenseplate: string;
-    private rides: Ride[];
 
-    constructor(vehicle: {chassisnumber: string; brand: string;  licenseplate: string;rides: Ride[]}){
+    constructor(vehicle: {id: number, chassisnumber: string; brand: string;  licenseplate: string;}){
         this.validate(vehicle);
-        
+        this.id = vehicle.id;
         this.chassisnumber = vehicle.chassisnumber;
         this.brand = vehicle.brand;
         this.licenseplate= vehicle.licenseplate;
-        this.rides = vehicle.rides;
     }
-    validate(vehicle: {chassisnumber: string; brand: string;  licenseplate: string;rides: Ride[]}){
+    validate(vehicle: {chassisnumber: string; brand: string;  licenseplate: string}){
         if(!vehicle.chassisnumber){
             throw new Error("Chassisbumber is required.");
         }
@@ -36,14 +35,19 @@ export class Vehicle{
     getLicenseplate(): string{
         return this.licenseplate;
     }
-    getRides(): Ride[]{
-        return this.rides;
-    }
+    
 
     getId(): number | undefined {
         return this.id;
     }
-    addRideToVehicle( ride: Ride) {
-        this.rides.push(ride);
+    
+
+    static from({ id, chassisnumber, brand, licenseplate, }: VehiclePrisma ) {
+        return new Vehicle({
+            id,
+            chassisnumber,
+            brand,
+            licenseplate,
+        });
     }
 }

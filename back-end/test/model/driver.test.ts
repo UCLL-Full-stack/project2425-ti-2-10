@@ -17,6 +17,5 @@ test('given: valid values for driver, when: driver is created, then: driver is c
 
     // then
     expect(driver.getUser()).toEqual(user);
-    expect(driver.getRides()).toBeUndefined();
     expect(driver.getReviews()).toBeUndefined();
 });

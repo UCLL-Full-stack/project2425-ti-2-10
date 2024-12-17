@@ -59,12 +59,17 @@ export class User{
         return this.role;
     }
 
-    static from({id,firstName,lastName,birthday,email,phoneNumber,role}:
-        UserPrisma) {
-            return new User({
-                id, firstName, lastName,birthday,email,phoneNumber,role: role as Role
-            })
-        }
+    static from({ id, firstName, lastName, birthday, email, phoneNumber, role }: UserPrisma) {
+        return new User({
+            id,
+            firstName,
+            lastName,
+            birthday,
+            email,
+            phoneNumber,
+            role: role as Role,
+        });
+    }
     
 
 

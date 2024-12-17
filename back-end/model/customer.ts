@@ -2,11 +2,11 @@ import { Review } from "./review";
 import { Ride } from "./ride";
 import { User } from "./user";
 
+import {User as UserPrisma, Customer as CustomerPrisma} from '@prisma/client'
+
 export class Customer{
     private id?: number;
     private user: User;
-    private reviews?: Review[];
-    private rides?: Ride[];
 
 
     constructor(customer: { id?: number; user: User}){
@@ -27,17 +27,12 @@ export class Customer{
         return this.user;
     }
     
-    getReviews(): Review[] | undefined{
-        return this.reviews;
-    }
-    getRides(): Ride[] | undefined{
-        return this.rides;
-    }
+    
 
-    addReviewToCostumer( review: Review){
-        this.reviews?.push(review);
-    }
-    addRideToCostumer( ride :Ride){
-        this.rides?.push(ride);
+    static from({ id, user, createdAt, updatedAt }: CustomerPrisma & { user: UserPrisma }) {
+        return new Customer({
+            id,
+            user: User.from(user),
+        });
     }
 }

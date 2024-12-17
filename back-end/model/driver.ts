@@ -2,12 +2,11 @@ import { Review } from "./review";
 import { Ride } from "./ride";
 import { User } from "./user";
 
-import { Driver as DriverPrisma, User as UserPrisma } from "@prisma/client";
+import { Driver as DriverPrisma, User as UserPrisma , Review as ReviewPrisma} from "@prisma/client";
 
 export class Driver{
     private id?: number;
     private user: User;
-    private rides?: Ride[];
     private reviews?: Review[]; //undefined laten? of init met lege array altijd?
 
     constructor(driver: { id?: number; user: User; rides?: Ride[]; reviews?:Review[]}){
@@ -16,7 +15,6 @@ export class Driver{
         
         this.id = driver.id;
         this.user = driver.user;
-        this.rides = driver.rides;
         this.reviews = driver.reviews;
     }
     validate(driver: { id?: number; user: User; rides?: Ride[]; reviews?:Review[]}) {
@@ -35,12 +33,6 @@ export class Driver{
     getReviews(): Review[] | undefined{
         return this.reviews;
     }
-    getRides(): Ride[] | undefined{
-        return this.rides;
-    }
-    addRideToDriver(ride : Ride){
-        this.rides?.push(ride);
-    }
     addReviewToDriver(review: Review){
         this.reviews?.push(review);
     }
@@ -48,12 +40,15 @@ export class Driver{
     static from({
         id,
         user,
+        reviews,
         createdAt,
         updatedAt,
-    }: DriverPrisma & {user: UserPrisma}){
+
+    }: DriverPrisma & {user: UserPrisma; reviews: ReviewPrisma[]}){
         return new Driver({
             id,
             user: User.from(user),
+            reviews: reviews.map((review)=> Review.from(review))
             
         })
     }

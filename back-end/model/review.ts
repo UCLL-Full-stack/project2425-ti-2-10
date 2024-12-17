@@ -1,18 +1,19 @@
 import { Customer } from "./customer";
 import { Driver } from "./driver";
+import { Driver as DriverPrisma, Review as ReviewPrisma, User as UserPrisma } from "@prisma/client";
+
 
 export class Review{
     private id?: number;
     private rating: number;
     private text: string;
-    private driver?: Driver;
 
     constructor( review: { id?: number; rating: number;text: string;}){
         this.validate(review);
         
         this.id = review.id;
         this.rating = review.rating;
-        this.text = review.text;     
+        this.text = review.text;
     }
     validate(review: { id?: number; rating: number;text: string;}) {
         if (!review.rating) { 
@@ -36,9 +37,21 @@ export class Review{
     getText(): string{
         return this.text;
     }
-    getDriver(): Driver | undefined{
-        return this.driver;
+    
+
+    static from({
+        id,
+        rating,
+        text,
+    }: ReviewPrisma ) {
+        return new Review({
+            id,
+            rating,
+            text,
+        });
     }
+    
+
     
     
 }

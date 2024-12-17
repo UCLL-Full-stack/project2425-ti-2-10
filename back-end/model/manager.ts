@@ -1,5 +1,6 @@
 import { Ride } from "./ride";
 import { User } from "./user";
+import {User as UserPrisma, Manager as ManagerPrisma} from '@prisma/client'
 
 export class Manager{
     private id?: number;
@@ -19,5 +20,16 @@ export class Manager{
 
     getUser(): User{
         return this.user;
+    }
+
+    getId(): number | undefined{
+        return this.id;
+    }
+    static from({ id, user, createdAt, updatedAt }: ManagerPrisma & { user: UserPrisma }) {
+        return new Manager({
+            id,
+            user: User.from(user),
+            rides: [], // Initialize with an empty array or handle appropriately
+        });
     }
 }
