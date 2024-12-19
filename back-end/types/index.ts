@@ -7,18 +7,19 @@ type UserInput = {
     birthday: Date;
     email: string;
     phoneNumber: string;
-}
+    password: string;
+    role: Role;
+};
 
 type ReviewInput = {
     id?: number;
     rating: number;
     text: string;
-    driver: DriverInput;
-}
+};
+
 type DriverInput = {
     id?: number;
     user:UserInput;
-    rides?: RideInput[];
     reviews?: ReviewInput[];
 };
 
@@ -30,26 +31,31 @@ type RideInput = {
     driver: DriverInput;
     customer: CustomerInput;
     vehicle: VehicleInput;
-    manager: ManagerInput;
-}
+};
 type CustomerInput = {
     id?: number;
     user: UserInput;
-    reviews?: ReviewInput[];
-    rides?: RideInput[];
-}
+};
 type VehicleInput = {
     chassisnumber: string;
     brand: string;
     licenseplate: string;
-    rides: RideInput[];
-}
-
+};
 type ManagerInput = {
     user:UserInput;
     rides: RideInput[];
+};
+
+type AuthenticationResponse = {
+    token: string;
+    email: string;
+    role: string;
+};
+
+type EmailInput= {
+    email: string;
 }
 
 export {
-    Role,UserInput,CustomerInput,DriverInput,ManagerInput,VehicleInput,RideInput,ReviewInput
+    Role,UserInput,CustomerInput,DriverInput,ManagerInput,VehicleInput,RideInput,ReviewInput,AuthenticationResponse, EmailInput
 }

@@ -83,6 +83,7 @@ model User {
   email     String    @unique
   phoneNumber  String
   role      String
+  password  String
   driver    Driver?
   customer  Customer?
   manager   Manager?

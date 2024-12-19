@@ -9,10 +9,11 @@ import { vehicleRouter } from '../controller/vehicle.routes';
 const prisma = new PrismaClient();
 
 const main = async () => {
+    await prisma.ride.deleteMany();
     await prisma.driver.deleteMany();
     await prisma.customer.deleteMany();
     await prisma.manager.deleteMany();
-    await prisma.ride.deleteMany();
+    
     await prisma.review.deleteMany();
     await prisma.vehicle.deleteMany();
     await prisma.user.deleteMany();
@@ -53,6 +54,7 @@ const main = async () => {
             birthday: new Date(2002, 6, 11),
             email: "matthias.poelmans@ucll.be",
             phoneNumber: "+32495678901",
+            password: await bcrypt.hash("secret11", 12),
             role: "driver"
 
         }
@@ -65,6 +67,7 @@ const main = async () => {
             birthday: new Date(1990, 5, 15),
             email: "sophie.vermeulen@ucll.be",
             phoneNumber: "+32498671234",
+            password: await bcrypt.hash("secret11", 12),
             role: "customer"
         }
     });
@@ -76,6 +79,7 @@ const main = async () => {
             birthday: new Date(1985, 2, 20),
             email: "thomas.desmet@ucll.be",
             phoneNumber: "+32476543210",
+            password: await bcrypt.hash("secret11", 12),
             role: "driver"
         }
     });
@@ -87,6 +91,7 @@ const main = async () => {
             birthday: new Date(1993, 7, 10),
             email: "emma.vandenbroeck@ucll.be",
             phoneNumber: "+32494561234",
+            password: await bcrypt.hash("secret11", 12),
             role: "manager"
         }
     });
@@ -98,6 +103,7 @@ const main = async () => {
             birthday: new Date(1998, 11, 5),
             email: "lucas.janssens@ucll.be",
             phoneNumber: "+32495876543",
+            password: await bcrypt.hash("secret11", 12),
             role: "customer"
         }
     });
@@ -109,6 +115,7 @@ const main = async () => {
             birthday: new Date(2000, 4, 25),
             email: "marie.peeters@ucll.be",
             phoneNumber: "+32492345678",
+            password: await bcrypt.hash("secret11", 12),
             role: "driver"
         }
     });

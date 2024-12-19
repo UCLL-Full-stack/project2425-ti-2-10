@@ -11,7 +11,7 @@ const birthDate = new Date("2024-11-11");
     const lastName = "test";
     const email = "manager@test.com";
     const phoneNumber = "+32497896757";
-    const user = new User({ firstName, lastName, birthday: birthDate, email, phoneNumber,role: "manager" });
+    const user = new User({ firstName, lastName, birthday: birthDate, email, phoneNumber,role: "manager",password:"secret" });
 
 
 test('given: valid values for manager, when: manager is created, then: manager is created with those values', () => {

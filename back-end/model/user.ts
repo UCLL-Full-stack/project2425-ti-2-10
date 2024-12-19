@@ -11,8 +11,9 @@ export class User{
     readonly email: string;
     readonly phoneNumber: string;
     readonly  role: Role;
+    readonly password: string;
 
-    constructor(user: { id?: number; firstName: string;lastName: string;birthday: Date;email: string; phoneNumber:string; role: Role;}){
+    constructor(user: { id?: number; firstName: string;lastName: string;birthday: Date;email: string; phoneNumber:string; role: Role;password: string;}){
         this.validate(user);
 
         
@@ -22,10 +23,11 @@ export class User{
         this.birthday = user.birthday;
         this.email = user.email;
         this.phoneNumber = user.phoneNumber;
-        this.role = user.role;
+        this.role=user.role;
+        this.password = user.password;
     }
 
-    validate(user: { id?: number; firstName: string;lastName: string;birthday: Date;email: string; phoneNumber:string;role: Role }) {
+    validate(user: { id?: number; firstName: string;lastName: string;birthday: Date;email: string; phoneNumber:string;role: Role ;password: string;}) {
         if (!user.firstName?.trim()) {
             throw new Error('Firstname is required');
         }
@@ -37,6 +39,9 @@ export class User{
             throw new Error('Email is required');
         }if (!user.phoneNumber?.trim()) {
             throw new Error('PhoneNumber is required');
+        }
+        if ( user.password?.trim().length < 8){
+            throw new Error('Password must be at least 8 characters long')
         }
     }
 
@@ -58,8 +63,11 @@ export class User{
     getRole(): Role {
         return this.role;
     }
+    getPassword(): string {
+        return this.password;
+    }
 
-    static from({ id, firstName, lastName, birthday, email, phoneNumber, role }: UserPrisma) {
+    static from({ id, firstName, lastName, birthday, email, phoneNumber, role, password}: UserPrisma) {
         return new User({
             id,
             firstName,
@@ -67,6 +75,7 @@ export class User{
             birthday,
             email,
             phoneNumber,
+            password,
             role: role as Role,
         });
     }
