@@ -29,8 +29,40 @@ const getDriverById = async ({ id }: { id: number }): Promise<Driver | null> => 
     }
 };
 
+const updateReviewsOfDriver = async ({
+    driver,
+}: {
+    driver: Driver;
+}): Promise<Driver | null> => {
+    if (!driver) {
+        throw new Error('Driver is required');
+    }
+
+    try {
+        const driverPrisma = await database.driver.update({
+            where: { id: driver.getId() },
+            data: {
+                reviews: {
+                    connect: driver.getReviews().map((review) => ({ id: review.getId() })),
+                },
+            },
+            include: {
+                user: true,
+                reviews: true,
+            },
+        });
+        return driverPrisma ? Driver.from(driverPrisma) : null;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+
+
+
 
 
 
 export default{
-    getAllDrivers,getDriverById}
+    getAllDrivers,getDriverById,updateReviewsOfDriver}

@@ -7,7 +7,7 @@ export class Vehicle{
     private brand: string;
     private licenseplate: string;
 
-    constructor(vehicle: {id: number, chassisnumber: string; brand: string;  licenseplate: string;}){
+    constructor(vehicle: {id?: number, chassisnumber: string; brand: string;  licenseplate: string;}){
         this.validate(vehicle);
         this.id = vehicle.id;
         this.chassisnumber = vehicle.chassisnumber;

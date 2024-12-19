@@ -23,6 +23,7 @@ type DriverInput = {
     reviews?: ReviewInput[];
 };
 
+
 type RideInput = {
     id?: number;
     startLocation: string;
@@ -37,6 +38,7 @@ type CustomerInput = {
     user: UserInput;
 };
 type VehicleInput = {
+    id?: number;
     chassisnumber: string;
     brand: string;
     licenseplate: string;
@@ -51,11 +53,14 @@ type AuthenticationResponse = {
     email: string;
     role: string;
 };
-
+type reviewToDriverInput = {
+    driver: DriverInput,
+    review: ReviewInput
+}
 type EmailInput= {
     email: string;
 }
 
 export {
-    Role,UserInput,CustomerInput,DriverInput,ManagerInput,VehicleInput,RideInput,ReviewInput,AuthenticationResponse, EmailInput
+    Role,UserInput,CustomerInput,DriverInput,ManagerInput,VehicleInput,RideInput,ReviewInput,AuthenticationResponse, EmailInput, reviewToDriverInput
 }

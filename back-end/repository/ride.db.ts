@@ -4,7 +4,7 @@ import database from "./database";
 
 
 const getAllRides = async ():Promise<Ride[]> => {
-    const ridesPrisma = await database.ride.findMany({
+    try{ const ridesPrisma = await database.ride.findMany({
         include: {
             driver: {
                 include: {
@@ -16,6 +16,10 @@ const getAllRides = async ():Promise<Ride[]> => {
         }
     })
     return ridesPrisma.map((ridePrisma) => Ride.from(ridePrisma));
+    }catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
 };
 
 
@@ -72,5 +76,53 @@ const createRide = async (ride: Ride): Promise<Ride> => {
     }
 };
 
+
+const getRideByDateAndDriver = async ({
+    date,
+    driverId,
+}: {
+    date: Date;
+    driverId: number;
+}): Promise<Ride | null> => {
+    try {
+        const ridePrisma = await database.ride.findFirst({
+            where: { date, driverId },
+            include: {
+                driver: { include: { user: true , reviews:true} },
+                customer: { include: { user: true } },
+                vehicle: true,
+            },
+        });
+        return ridePrisma ? Ride.from(ridePrisma) : null;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+const getRideByDateAndVehicle = async ({
+    date,
+    vehicleId,
+}: {
+    date: Date;
+    vehicleId: number;
+}): Promise<Ride | null> => {
+    try {
+        const ridePrisma = await database.ride.findFirst({
+            where: { date, vehicleId },
+            include: {
+                driver: { include: { user: true , reviews:true} },
+                customer: { include: { user: true } },
+                vehicle: true,
+            },
+        });
+        return ridePrisma ? Ride.from(ridePrisma) : null;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+
 export default{
-    getAllRides, getRidesForDriver}
+    getAllRides, getRidesForDriver,createRide,getRideByDateAndDriver,getRideByDateAndVehicle}
