@@ -74,7 +74,7 @@ vehicleRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
 
 /**
  * @swagger
- * /veicles:
+ * /vehicles:
  *   post:
  *      security:
  *       - bearerAuth: []
