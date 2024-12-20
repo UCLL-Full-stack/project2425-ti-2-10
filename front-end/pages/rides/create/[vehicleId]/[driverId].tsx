@@ -11,16 +11,20 @@ const CreateRidePage = () => {
   const router = useRouter();
   const { vehicleId, driverId } = router.query;
   const customerObj = JSON.parse(localStorage.getItem("loggedInUser") || "{}");
+  const actualEmail = customerObj.email as string;
+  const modifiedEmail = actualEmail.replace(/@/g, '-at-');
+  console.log(modifiedEmail); // als: "example%40domain.com"
   const fetcher = async () => {
     if (!router.isReady || !vehicleId || !driverId) return null;
 
     const [vehicleResponse, driverResponse, customerResponse] = await Promise.all([
       VehicleService.getVehicleById(vehicleId as string),
       DriverService.getDriverById(driverId as string),
-      CustomerService.getCustomerByEmail(customerObj.email as string),
+      CustomerService.getCustomerByEmail(modifiedEmail),
     ]);
 
     if (!vehicleResponse.ok || !driverResponse.ok || !customerResponse.ok) {
+
       throw new Error("Failed to fetch data.");
     }
 

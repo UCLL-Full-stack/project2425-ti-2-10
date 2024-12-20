@@ -14,7 +14,9 @@ customerRouter.get('/:id', async (req: Request, res: Response, next: NextFunctio
 
 customerRouter.get('/:email', async (req: Request, res: Response, next: NextFunction) => { 
     try {
-        const customer = await customerService.getCustomerByEmail(req.params.email);
+        const actualEmail = req.params.email.replace(/-at-/g, '@');
+        console.log('backend: '+actualEmail);
+        const customer = await customerService.getCustomerByEmail(actualEmail);
         res.status(200).json(customer);
     } catch (error) {
         next(error);

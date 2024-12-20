@@ -95,7 +95,7 @@ const UserLoginForm: React.FC = () => {
       )}
       <form onSubmit={handleSubmit}>
         <label htmlFor="nameInput" className="block mb-2 text-sm font-medium">
-          {t("login.label.username")}
+          {t("login.label.email")}
         </label>
         <div className="block mb-2 text-sm font-medium">
           <input
