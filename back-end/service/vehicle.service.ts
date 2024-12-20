@@ -7,7 +7,7 @@ import { Vehicle } from "../model/vehicle";
 import { vehicleRouter } from "../controller/vehicle.routes";
 
 const getAllVehicles = async ({ role }: { role: Role}): Promise<Vehicle[]> => {
-    if(role==="manager"){
+    if(role==='manager' || role === 'customer'){
         return vehicleDB.getAllVehicles();
     }
     else {

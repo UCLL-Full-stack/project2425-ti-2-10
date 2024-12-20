@@ -54,14 +54,6 @@ const Header: React.FC = () => {
                 {t("header.nav.rides")}
               </Link>
             )}
-            {loggedInUser.role === "driver" && (
-              <Link
-                href="/vehicles"
-                className="px-4 text-white text-xl hover:bg-gray-600 rounded-lg"
-              >
-                {t("header.nav.vehicles")}
-              </Link>
-            )}
             {loggedInUser.role === "manager" && (
               <>
                 <Link

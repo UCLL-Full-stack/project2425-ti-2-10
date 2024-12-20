@@ -10,7 +10,7 @@ import { UnauthorizedError } from "express-jwt";
 
 
 const getAllDrivers = async ({ role }: { role: Role}): Promise<Driver[]> => {
-    if(role==='manager'){
+    if(role==='manager' || role === 'customer'){
         return driverDb.getAllDrivers();
     }
     throw new UnauthorizedError('credentials_required', {message: 'You are not authorized to access this resource.', });
