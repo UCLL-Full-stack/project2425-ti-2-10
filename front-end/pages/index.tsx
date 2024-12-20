@@ -27,7 +27,32 @@ const Home: React.FC = () => {
                     
                     <h1 className="pl-6 text-4xl text-gray-800">{t("header.welcome")}</h1>
                 </span>
-
+                <table class="table-auto w-full text-left">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                            <td>emma.vandenbroeck@ucll.be</td>
+                        <td>secret11</td>
+                     <td>manager</td>
+                    </tr>
+                    <tr>
+                        <td>lucas.janssens@ucll.be</td>
+                        <td>secret11</td>
+                        <td>customer</td>
+                    </tr>
+                    <tr>
+                        <td>marie.peeters@ucll.be</td>
+                        <td>secret11</td>
+                        <td>driver</td>
+                    </tr>
+                </tbody>
+            </table>
                 <div className="pt-6">
                     <p>
                        
