@@ -15,5 +15,20 @@ const getCustomerById = async ({ id }: { id: number }): Promise<Customer | null>
     }
 };
 
+const getCustomerByEmail = async ({ email }: { email: string }): Promise<Customer | null> => {
+    try {
+        const customerPrisma = await database.customer.findFirst({
+            where: { user: { email } },
+            include: { user: true },
+        });
 
-export default{getCustomerById}
+        return customerPrisma ? Customer.from(customerPrisma) : null;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+
+
+export default{getCustomerById,getCustomerByEmail}

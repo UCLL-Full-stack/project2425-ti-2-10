@@ -162,7 +162,6 @@ userRouter.post('/signup', async (req: Request , res: Response, next: NextFuncti
 userRouter.post('/login', async (req: Request , res: Response, next: NextFunction) => {
     try {
         const userInput = <UserInput>req.body
-        console.log(userInput)
         const response = await userService.authenticate(userInput);
         res.status(200).json({message: 'Authentication succes', ...response});
     }

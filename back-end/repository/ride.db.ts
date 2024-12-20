@@ -44,6 +44,28 @@ const getRidesForDriver = async ({ email }: { email: string }): Promise<Ride[]> 
     }
 };
 
+
+const getRidesForCustomer = async ({ email }: { email: string }): Promise<Ride[]> => {
+    try {
+        const ridesPrisma = await database.ride.findMany({
+            where: { customer: { user: { email } } },
+            include: {
+                driver: {
+                    include: {
+                        user: true, // Include user details for the driver
+                        reviews: true, // Include reviews for the driver
+                    }},
+                customer: {include: {user: true}}, //include user voor customer
+                vehicle: true  //niet managers want ik denk dat dit niet nodig is voor de frontend
+            },
+        });
+        return ridesPrisma.map((ridePrisma) => Ride.from(ridePrisma));
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
 const createRide = async (ride: Ride): Promise<Ride> => {
     try {
         const ridePrisma = await database.ride.create({
@@ -125,4 +147,4 @@ const getRideByDateAndVehicle = async ({
 
 
 export default{
-    getAllRides, getRidesForDriver,createRide,getRideByDateAndDriver,getRideByDateAndVehicle}
+    getAllRides, getRidesForDriver,createRide,getRideByDateAndDriver,getRideByDateAndVehicle, getRidesForCustomer}

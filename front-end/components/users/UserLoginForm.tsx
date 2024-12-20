@@ -6,16 +6,16 @@ import React, { useState } from "react";
 import { useTranslation } from "next-i18next";
 
 const UserLoginForm: React.FC = () => {
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [nameError, setNameError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [statusMessages, setStatusMessages] = useState<StatusMessage[]>([]);
   const router = useRouter();
   const { t } = useTranslation();
 
   const clearErrors = () => {
-    setNameError(null);
+    setEmailError(null);
     setPasswordError(null);
     setStatusMessages([]);
   };
@@ -23,8 +23,8 @@ const UserLoginForm: React.FC = () => {
   const validate = (): boolean => {
     let result = true;
 
-    if (!name && name.trim() === "") {
-      setNameError( t("login.validate.name"));
+    if (!email && email.trim() === "") {
+      setEmailError( t("login.validate.email"));
       result = false;
     }
 
@@ -45,7 +45,7 @@ const UserLoginForm: React.FC = () => {
       return;
     }
 
-    const user = { username: name, password };
+    const user = { email: email, password };
     const response = await UserService.loginUser(user);
 
     if (response.status === 200) {
@@ -61,11 +61,11 @@ const UserLoginForm: React.FC = () => {
         "loggedInUser",
         JSON.stringify({
           token: user.token,
-          fullname: user.fullname,
-          username: user.username,
-          rol: user.rol,
+          email: user.email,
+          role: user.role,
         })
       );
+      
 
       setTimeout(() => {
         router.push("/");
@@ -101,11 +101,11 @@ const UserLoginForm: React.FC = () => {
           <input
             id="nameInput"
             type="text"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full p-2.5"
           />
-          {nameError && <div className="text-red-800 ">{nameError}</div>}
+          {emailError && <div className="text-red-800 ">{emailError}</div>}
         </div>
         <div className="mt-2">
           <div>

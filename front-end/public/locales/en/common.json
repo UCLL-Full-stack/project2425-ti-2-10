@@ -1,27 +1,31 @@
 {
-    "app.title": "Courses App",
+    "app.title": "ComfortRide App",
     "general.error": "An error has occurred. Please try again later.",
+    "language": "Language",
 
-"login": {
-"title": "Login",
-"button": "Login",
-"success": "Login succesful. Redirecting to homepage...",
-"validate": {
-"name": "Name is required",
-"password": "Password is required"
-},
-"label": { "username": "Username:", "password": "Password:" }},
+    "login": {
+        "title": "Login",
+        "button": "Login",
+        "success": "Login succesful. Redirecting to homepage...",
+        "validate": {
+            "email": "Email is required",
+            "password": "Password is required"
+            },
+    "label": { "email": "Email:", "password": "Password:" }},
 
-"header": {
-"welcome": "Welcome",
-"nav": {
-"home": "Home",
-"lecturers": "Lecturers",
-"schedules": "Schedules",
-"login": "Login",
-"logout": "Logout"
+    "header": {
+        "welcome": "Welcome",
+        "nav": {
+            "home": "Home",
+            "drivers": "Drivers",
+            "rides": "Rides",
+            "vehicles": "Vehicles",
+            "login": "Login",
+            "logout": "Logout"
+            }
+    }
+    
 }
-}}
 
 
 

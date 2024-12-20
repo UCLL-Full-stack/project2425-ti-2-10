@@ -20,7 +20,6 @@ const createUser = async ({firstName, lastName, birthday, email, phoneNumber,pas
 
 const authenticate = async ({ email, password }: UserInput): Promise<AuthenticationResponse> => {
     const user = await getUserByEmail({email});
-    console.log(user)
     const isValidPassword = await bcrypt.compare(password, user.getPassword());
 
     if (!isValidPassword) {

@@ -103,4 +103,13 @@ vehicleRouter.post('/', async (req: Request, res: Response, next: NextFunction) 
         next(error);
     }
 });
+
+vehicleRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => { 
+    try {
+        const driver = await vehicleService.getVehicleById(Number(req.params.id));
+        res.status(200).json(driver);
+    } catch (error) {
+        next(error);
+    }
+});
 export {vehicleRouter}

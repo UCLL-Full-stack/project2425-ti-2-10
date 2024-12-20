@@ -62,7 +62,7 @@
 
 import express, { NextFunction, Request, Response } from 'express';
 import driverService from '../service/driver.service';
-import { reviewToDriverInput } from '../types';
+import { reviewToDriverInput, Role } from '../types';
 
 
 const driverRouter = express.Router();
@@ -88,7 +88,9 @@ const driverRouter = express.Router();
 
 driverRouter.get('/', async (req: Request, res: Response, next: NextFunction) => { //alle drivers krijgen
     try {
-        const drivers = await driverService.getAllDrivers();
+        const request = req as Request & { auth: { email: string; role: Role } };
+        const {email, role} = request.auth;
+        const drivers = await driverService.getAllDrivers({role});
         res.status(200).json(drivers);
     } catch (error) {
         next(error);

@@ -14,6 +14,9 @@ const getRides = async ({ email,role }: { email: string ,role: Role}): Promise<R
     }
     else if(role ==="driver"){
         return rideDb.getRidesForDriver({email});
+    }
+    else if(role ==="customer"){
+         return rideDb.getRidesForCustomer({email});
     }else {
         throw new UnauthorizedError('credentials_required', {message: 'You are not authorized to access this resource.', });
     }

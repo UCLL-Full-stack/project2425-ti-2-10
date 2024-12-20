@@ -4,12 +4,17 @@ import { User } from "../model/user";
 import driverDb from "../repository/driver.db";
 
 import reviewDb from "../repository/review.db";
-import { DriverInput, ReviewInput } from "../types";
+import { DriverInput, ReviewInput, Role } from "../types";
 import { Review } from "../model/review";
+import { UnauthorizedError } from "express-jwt";
 
 
-const getAllDrivers = async (): Promise<Driver[]> => {
-    return driverDb.getAllDrivers();
+const getAllDrivers = async ({ role }: { role: Role}): Promise<Driver[]> => {
+    if(role==='manager'){
+        return driverDb.getAllDrivers();
+    }
+    throw new UnauthorizedError('credentials_required', {message: 'You are not authorized to access this resource.', });
+    
 }
 const getDriverById = async (id: number): Promise<Driver> => {
     const driver = await driverDb.getDriverById({ id });

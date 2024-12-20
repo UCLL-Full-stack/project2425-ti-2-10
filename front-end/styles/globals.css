@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+    header {
+        background-color: lightcoral;
+        
+    }
     h1 {
         @apply text-center text-indigo-800 text-3xl
     }

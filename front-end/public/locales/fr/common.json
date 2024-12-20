@@ -1,0 +1,32 @@
+{
+    "app.title": "ComfortRide App",
+    "general.error": "Une erreur s'est produite. Veuillez réessayer plus tard.",
+    "language": "Langue",
+
+    "login": {
+        "title": "Login",
+        "button": "Login",
+        "success": "Connexion réussie. Redirection vers la page d'accueil...",
+        "validate": {
+            "email": "Le email est obligatoire",
+            "password": "Le mot de passe est obligatoire"
+            },
+    "label": { "email": "email:", "password": "moet de passe:" }},
+
+    "header": {
+        "welcome": "Bienvenue",
+        "nav": {
+            "home": "Accueil",
+            "drivers": "Chauffeurs",
+            "rides": "Déplacements",
+            "vehicles": "véhicules",
+            "login": "Login",
+            "logout": "Logout"
+            }
+    }
+}
+
+
+
+
+    
